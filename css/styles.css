@@ -15,7 +15,7 @@
   height: 650px;
   margin: auto;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: wrap;
   perspective: 1000px;
 }
 
