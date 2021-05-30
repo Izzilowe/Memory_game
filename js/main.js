@@ -1,4 +1,5 @@
 const cards = document.querySelectorAll(".memory-card");
+const dws = document.querySelector(".dws");
 
 let hasFlippedCard = false;
 let boardLocked = false;
@@ -6,7 +7,9 @@ let firstCard, secondCard;
 
 const flipCard = (event) => {
   if (boardLocked) return;
+
   const target = event.target.parentElement;
+
   if (target === firstCard) return;
 
   target.classList.add("flip");
@@ -18,21 +21,15 @@ const flipCard = (event) => {
     hasFlippedCard = false;
     secondCard = target;
 
-    // Check for match
     checkForMatch();
   }
+  dws.addEventListener("click", startNewGame);
 };
 
 const checkForMatch = () => {
   const isEqual = firstCard.dataset.img === secondCard.dataset.img;
 
   isEqual ? disableCards() : unFlipCards();
-
-  //   if (firstCard.dataset.lol === secondCard.dataset.lol) {
-  //     disableCards();
-  //   } else {
-  //     unFlipCards();
-  //   }
 };
 
 const disableCards = () => {
@@ -51,15 +48,31 @@ const unFlipCards = () => {
   }, 1000);
 };
 
-const resetBoard = () => {
-    [hasFlippedCard, boardLocked] = [false, false]
-    [firstCard, secondCard] = [null, null]
+const startNewGame = () => {
+  cards.forEach((card) => {
+    card.classList.remove("flip");
+      resetBoard();
+    setTimeout(() => {
+      addEvent();
+    }, 300);
+  });
+  dws.removeEventListener("click", startNewGame);
 };
 
-cards.forEach((card) => {
-  // Add Event Listner
-  card.addEventListener("click", flipCard);
+const resetBoard = () => {
+  [hasFlippedCard, boardLocked] = [false, false];
+  [firstCard, secondCard] = [null, null];
+};
 
-  const rendomIndex = Math.floor(Math.random() * cards.length);
-  card.style.order = rendomIndex;
-});
+const addEvent = () => {
+  cards.forEach((card) => {
+    card.addEventListener("click", flipCard);
+
+    const rendomIndex = Math.floor(Math.random() * cards.length);
+    card.style.order = rendomIndex;
+  });
+};
+
+addEvent();
+
+
