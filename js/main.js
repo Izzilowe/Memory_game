@@ -1,9 +1,5 @@
-const cards = document.querySelectorAll(".memory-card");
-const dws = document.querySelector(".dws");
-
-let hasFlippedCard = false;
-let boardLocked = false;
-let firstCard, secondCard;
+import { hasFlippedCard, boardLocked, firstCard, secondCard } from ".let";
+import { cards, dws } from "./const";
 
 const flipCard = (event) => {
   if (boardLocked) return;
@@ -51,7 +47,7 @@ const unFlipCards = () => {
 const startNewGame = () => {
   cards.forEach((card) => {
     card.classList.remove("flip");
-      resetBoard();
+    resetBoard();
     setTimeout(() => {
       addEvent();
     }, 300);
@@ -74,5 +70,3 @@ const addEvent = () => {
 };
 
 addEvent();
-
-
