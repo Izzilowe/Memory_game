@@ -1,5 +1,8 @@
-import { hasFlippedCard, boardLocked, firstCard, secondCard } from ".let";
 import { cards, dws } from "./const";
+
+let hasFlippedCard = false;
+let boardLocked = false;
+let firstCard, secondCard;
 
 const flipCard = (event) => {
   if (boardLocked) return;
